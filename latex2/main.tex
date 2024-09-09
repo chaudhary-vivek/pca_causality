@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+\usepackage{preamble}
+\begin{document}
+%%%%%%%%%%%%%%%%%frond page%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\title{Counterfactual and Synthetic Control Method: Causal Inference with Instrumented Principal Component Analysis\thanks{We thank Matteo Lacopini, Emanuele Bacchiocchi for helpful discussion on this paper. There is a Github repository for this paper, available at \href{https://github.com/CongWang141/JMP.git}{https://github.com/CongWang141/JMP.git}, which contains the latest version of the paper, the code, and the data.}}
+
+\author{Cong Wang\thanks{Department of Economics and Law, Sapienza University of Rome.}}
+\date{\today}
+\maketitle
+\begin{center}
+\href{https://github.com/CongWang141/JMP/blob/main/latex/main.pdf}{Job Market Paper, latest version available here.}
+\end{center}
+
+\begin{abstract}
+\noindent We propose a novel method for causal inference within the frameworks of counterfactual and synthetic control methods. Building on the Generalized Synthetic Control method developed by \cite{xu2017generalized}, the Instrumented Principal Component Analysis method instruments factor loadings with predictive covariates rather than including them as direct regressors. These instrumented factor loadings exhibit time-varying dynamics, offering a better economic interpretation. Covariates are instrumented through a transformation matrix, $\Gamma$, when we have a large number of covariates it can be easily reduced in accordance with a small number of latent factors helping us to effectively handle high-dimensional datasets and making the model parsimonious. Most importantly, our simulations show that this method is less biased in the presence of unobserved covariates compared to other mainstream approaches. In the empirical application, we use the proposed method to evaluate the effect of Brexit on foreign direct investment to the UK.\\
+
+\noindent\textbf{Keywords:} Synthetic Control, Principal Component Analysis, Factor Model, Causal Inference\\
+
+\noindent\textbf{JEL Codes:} G11, G12, G30\\
+\bigskip
+\end{abstract}
+\setcounter{page}{0}
+\thispagestyle{empty}
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak \newpage
+\doublespacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction} 
+\label{sec: introduction}
+In this paper, we introduce a novel counterfactual imputation method for causal inference, called the Counterfactual and Synthetic Control method with Instrumented Principal Component Analysis (CSC-IPCA). This method combines the dimension reduction capabilities of Principal Component Analysis (PCA) described by \cite{jollife2016principal} to handle high-dimensional datasets with the versatility of the factor models studied by \cite{bai2003computation}, \cite{bai2009panel}, among others, which accommodate a wide range of data-generating processes (DGPs). The CSC-IPCA method represents a significant advancement over the Generalized Synthetic Control (GSC) method proposed by \cite{xu2017generalized}, which utilizes the Interactive Fixed Effects (IFE) approach to model DGPs and impute missing counterfactuals for causal inference.
+
+The main difference between our method and CSC-IFE\footnote{In this paper, we consider the Generalized Synthetic Control (GSC) method as part of the broader counterfactual and synthetic control framework. Therefore, throughout the paper, we refer to the GSC method as the Counterfactual and Synthetic Control method with Interactive Fixed Effects (CSC-IFE).} lies in how we handle covariates. CSC-IFE combines the structural component $\Lambda_i F_t$ with the regressors $X_{it} \beta$, as shown in the following equation:
+
+\begin{equation}
+\label{eqn: ife}
+y_{it} = \Lambda_i F_t + X_{it} \beta + \epsilon_{it}
+\end{equation}
+Instead of including the covariates $X_{it}$ linearly as regressors, the CSC-IPCA method instruments the factor loadings $\Lambda_{it}$ with predictive covariates through a transformation matrix $\Gamma$. This method is constructed as fallowing: first, it assumes a simple factor model, as in \cite{bai2003computation}, with only the structural component combined with factor loadings $\Lambda_i$ and common factors $F_t$:
+
+\begin{equation}
+\label{eqn: fe}
+y_{it} = \Lambda_i F_t + \epsilon_{it}
+\end{equation}
+Next, it instruments the static factor loadings $\Lambda_i$ with covariates $X_{it}$ instead of including them as regressors, allowing the factor loadings to incorporate time-varying properties and become dynamic:
+
+\begin{equation}
+\label{eqn: instrument}
+\Lambda_{it} = X_{it}\Gamma + H_{it}
+\end{equation}
+
+The static factor loadings $\Lambda_i$ in Equation \ref{eqn: fe} are assumed to be time-invariant by most studies in the related literature. However, in many economonic and social science context, the factor loadings are not constant but fluctuate over time in response to relevant covariates. By instrumenting the factor loadings $\Lambda_i$ with covariates $X_{it}$ through Equation \ref{eqn: instrument}, we can capture the time-varying properties of the factor loadings. The matrix $\Gamma$, serving as an $L \times K$ mapping function from covariates (with the number of L) to factor loadings (with the number of K), also acts as dimension reduction operation, which aggregates all the information from the covariates into a smaller number of factor loadings, making the model parsimonious.
+
+The CSC-IPCA method offers several key benefits. First, it inherits the dimension reduction capabilities of conventional PCA, where the transformation matrix $\Gamma$ serves as a dimensionality reduction operator. This enables efficient handling of high-dimensional datasets with a large number of predictive covariates while maintaining the sparsity of the factor model. This feature is particularly valuable when working with financial data (\cite{feng2020taming}) and high-dimensional macroeconomic time series data (\cite{brave2009chicago}).
+
+Second, unlike conventional static factor models, the instrumented factor loadings in CSC-IPCA exhibit time-varying dynamics. This is particularly realistic in many economic and social science contexts. For example, consider a company that increases its investment in R\&D, transitioning from a conservative stance to a more aggressive one. This change can also impact its profitability, potentially shifting it from a robust to a weaker position. As a result, the unit effect evolves along with its investment strategy. In such cases, static factor loadings fail to capture the time-varying dynamics of the company's changing fundamentals.
+
+Last but not least, the most valuable benefit of the CSC-IPCA method is its reduced bias when unobserved covariates are present, compared to other similar methods. Instead of including covariates linearly as regressors which is a practice often criticized for model misspecification. The CSC-IPCA method incorporates covariates into the factor loadings through a mapping matrix. This approach provides a more efficient way of handling covariates, allowing for better extraction of predictive information and reducing exposure to model misspecification. Our simulation studies demonstrate that, in the presence of unobserved covariates, the CSC-IPCA method is the least biased among the methods considered.
+
+The IPCA method was developed by \cite{kelly2020instrumented}, and applied by \cite{kelly2019characteristics} for predicting stock returns in the asset pricing literature. The main difference between using the IPCA method for prediction and for causal inference lies in the assumption that the transformation matrix $\Gamma$ differs between treated and control units. In the estimation process, we first use the control units to estimate the common factors $F_t$ over the entire time period. Next, we update the transformation matrix $\Gamma_{treat}$ for the treated units using data from the pre-treatment period. The subsequent step involves normalizing the common factors and the transformation matrix based on prespecified normalization restrictions. Finally, the estimated parameters are used to impute the missing counterfactuals for the treated units after the treatment, allowing us to evaluate the average treatment effect on the treated (ATT).
+
+We provide bootstrap and leave-one-out cross-validation procedures for hyperparameter tuning to select the optimal number of latent factors, $K$. Additionally, we construct confidence intervals using the novel and increasingly popular conformal inference method developed by \cite{chernozhukov2021exact}. In our formal results, we derive the asymptotic properties based on the unbiased and efficient estimation of both $\Gamma$ and $F_t$. We show that the convergence rate of our estimand, i.e. the ATT, is the smaller of $\mathcal{O}p(\sqrt{N_{ctrl}})$ and $\mathcal{O}p(\sqrt{N_{treat}T_{pre}})$, so large $T_{pre}$ and $N_{ctrl}$ would be necessary for us to get the accurate estimation.
+
+In the empirical application, we use this newly developed method to assess the impact of Brexit on foreign direct investment (FDI) to the U.K. We use 9 covariates that we consider have predictive power over FDI. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Literature Review} 
+\label{sec: literature}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Causal inference in economics and other social sciences is frequently complicated by the absence of counterfactuals, which are essential for evaluating the impact of a treatment or policy intervention. \cite{imbens2015causal} state that, at some level, all methods for causal inference can be viewed as missing data imputation methods, although some are more explicit than others. For instance, under certain assumptions, the matching method (\cite{abadie2006large, abadie2011bias}) explicitly imputes the missing counterfactual for treated units with meticulously selected controls. The DID method (\cite{card1993minimum, ashenfelter1978estimating}), on the other hand, implicitly imputes the missing counterfactual by differencing the control units before and after treatment. Meanwhile, the SCM method explicitly imputes the missing counterfactual with a weighted average of control units. Our method aligns with the recent trend in the causal inference literature, aiming to explicitly impute the missing counterfactual by modeling the entire DGPs, a strategy highlighted by \cite{athey2021matrix} with their matrix completion (MC) method, and \cite{xu2017generalized} with their CSC-IFE method.
+
+As another branch of causal inference, modeling entire DGPs offers distinct advantages. This approach helps to overcome the constraints imposed by untestable and stringent assumptions, such as unconfoundedness and common support in matching methods (\cite{rosenbaum1983central, rubin1997estimating}), as well as the parallel trends assumption in difference-in-differences (DID) models (\cite{card1993minimum}). Additionally, it addresses the limitations of the original Synthetic Control Method (SCM) (\cite{abadie2010synthetic}) and its variants (\cite{ben2021augmented}, \cite{arkhangelsky2021synthetic}), which require the outcomes of treated units to lie within or near the convex hull formed by the control units.
+
+Factor models have long been explored in the econometrics literature related to modeling panel data, with significant contributions by \cite{bai2003computation}, \cite{pesaran2006estimation}, \cite{stock2002forecasting}, \cite{eberhardt2009cross}, among others. However, within the context of causal inference, \cite{hsiao2012panel} stands out as the first work proposing the use of these methods specifically for predicting missing counterfactuals in synthetic control settings, followed by \cite{gobillon2016regional}, \cite{xu2017generalized}, \cite{chan2016policy}, and \cite{li2018inference}. Conventional factor models with static factor loadings fail to capture time-varying factor loadings that arise due to changes in a unit's fundamentals. \cite{kelly2020instrumented} was the first to incorporate time-varying factor loadings by instrumenting them with covariates. The IPCA method has been successfully applied to stock return prediction by \cite{kelly2019characteristics}, demonstrating significant accuracy in out-of-sample predictions. Our paper is the first to apply this method to causal inference within the relevant literature.
+
+This paper is structured as follows. Section \ref{sec: framework} introduces the framework of the CSC-IPCA method, detailing the functional form and assumptions for identification. Section \ref{sec: estimation} outlines the estimation procedures, including hyperparameter tuning and inference. Section \ref{sec: simulation} presents the results of Monte Carlo simulations, comparing different estimation methods and providing finite sample properties. Section \ref{sec: application} demonstrates the application of the CSC-IPCA method in a real-world setting, evaluating the impact of Brexit on foreign direct investment (FDI) in the U.K. Section \ref{sec: conclusion} concludes the paper with a summary of the main findings and potential future research directions. More detailed proofs and derivations are provided in Appendix \ref{sec: formal result}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Framework} 
+\label{sec: framework}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Consider $Y_{it}$ as the observed outcome for a specific unit $i \ (i = 1, \dots, N)$ at time $t \ (t = 1, \dots, T)$. The total number of observed units in the panel is $N = N_{treat} + N_{ctrl}$, where $N_{treat}$ represents the number of units in the treatment group $\mathcal{T}$ and $N_{ctrl}$ represents the number of units in the control group $\mathcal{C}$. Each unit is observed over $T = T_{pre} + T_{post}$ periods, where $T_{pre}$ is the number of periods before treatment and $T_{post}$ is the number of periods after treatment. We observe the treatment effect at $T_{pre} + 1$ right after the beginning of the treatment and continue to observe thereafter until the end of the observation periods, a scenario commonly referred to as block assignment\footnote{We can also adopt this method for the more commonly observed staggered adoption scenario. We demonstrate different treatment assignment mechanisms in Appendix \ref{app: treatment assignment}}. Following Equations \ref{eqn: fe} and \ref{eqn: instrument}, we assume that the outcome variable $Y_{it}$ is given by a simple factor model with factor loadings instrumented by covariates. The functional form is given by:
+
+\begin{assumption}
+Functional form:
+\label{ass: function}
+\end{assumption}
+
+\begin{equation}
+\begin{aligned}
+& Y_{it} = D_{it} \circ \delta_{it} + \Lambda_{it}F_{t}' + \mu_{it}, \\
+& \Lambda_{it} = X_{it}\Gamma + H_{it}
+\end{aligned}
+\label{eqn: functional form}
+\end{equation}
+
+The primary distinction of this functional form from existing fixed effects models (\cite{gobillon2016regional, chan2016policy}) is that the factor loading $\Lambda_{it}$ is instrumented by observed covariates $X_{it}$, which makes the conventionally static factor loadings exhibit time-varying features. Specifically, $F_t = [f_t^1, \ldots, f_t^K]$ is a vector of $K$ unobserved common factors, and $\Lambda_{it} = [\lambda_{it}^1, \ldots, \lambda_{it}^K]$ represents a vector of factor loadings. Meanwhile, the vector $X_{it} = [x_{it}^1, \ldots, x_{it}^L]$ comprises $L$ observed covariates. The transformation matrix $\Gamma$, which is of size $L \times K$, maps the information from observed covariates $X_{it}$ to factor loadings $\Lambda_{it}$. This integration permits $\Lambda_{it}$ to exhibit variability across time and units, thereby introducing an additional layer of heterogeneity into the model. Another key difference from the CSC-IFE approach by \cite{xu2017generalized} is that we retain only the structural component $\Lambda_{it} F_t$ between common factors and factor loadings; the linear part of covariates $X_{it}\beta$ (as specified in Equation \ref{eqn: ife}) is excluded from the functional form. The logic behind this is that we believe the unit-specific factor loadings, instrumented by covariates, have included all the predictive information from these predictive covariates. This functional form exhibits two major advantages over the CSC-IFE model. Firstly, it suffers less from the risk of model miss-specification, as the model is sufficiently simpler. Secondly, it incorporates a dimension reduction operation via the matrix $\Gamma$, which allows us to handle high-dimensional datasets, especially when dealing with a large number of covariates. Thirdly, instead of accommodating predictive covariates as regressors we believe instrumenting factor loadings with covariates can better abstract information for outcome prediction.
+
+The remainder of the model adheres to conventional standards, where $D_{it}$ denotes a binary treatment indicator, and $\delta_{it}$ represents the treatment effect, which varies across units and over time. For computational simplicity, we assume $D_{it} = 1$ for unit $i$ in the group of treated $\mathcal{T}$ and for period $t > T_{pre}$, with all other $D_{it}$ set to $0$. The model easily accommodates variations in treatment timing by removing the constraint that treatment must commence simultaneously for all treated units. The term $\mu_{it}$ signifies the idiosyncratic error associated with the outcome variable $Y_{it}$. Additionally, $H_{it} = [\eta_{it}^1, \ldots, \eta_{it}^K]$ constitutes the vector of error terms linked to $K$ unobserved factor loadings.
+
+Following \cite{splawa1990application} potential outcome framework (also discussed by \cite{rubin1974estimating, rubin2005causal}), we observe the actual outcome for the treated and untreated units for the entire period. If we combine the two components in Equation \ref{eqn: functional form}, we get the actual outcomes for treated and controls distinguishied by different $\Gamma$ and treatment assignments, as presented in the following:
+
+\begin{equation}
+\label{eqn: potential outcome}
+\begin{cases}
+      Y_{it}^1 = \delta_{it} + X_{it} \Gamma_{treat} F'_t + \epsilon_{it} & if \ i \in \mathcal{T} \ \& \ t > T_{pre} \\
+      Y_{it}^0 = X_{it} \Gamma_{ctrl} F'_t + \epsilon_{it} & if \ i \in \mathcal{C}.
+\end{cases}
+\end{equation}
+
+where Equation \ref{eqn: potential outcome} represents the actual outcome for the treated and control units combined the two parts together in Equation \ref{eqn: functional form}. Our goal is to impute the missing counterfactual $\hat{Y}_{it}^0 = X_{it} \hat{\Gamma}_{treat} \hat{F}_t$ for the treated units $i \in \mathcal{T}$ when $t > T_{pre}$, where the $\hat{\Gamma}_{treat}$ and $\hat{F}_t$ are estimated parameters. We then calculate the ATT as the difference between the actual outcome and the imputed missing counterfactuals, which is defined as:
+
+\begin{equation}
+\widehat{ATT}_{t} = \frac{1}{N_{treat}}\sum_{i \in \mathcal{T}} \left( Y_{it}^1 - \hat{Y}_{it}^0 \right) = \frac{1}{N_{treat}}\sum_{i \in \mathcal{T}}\hat{\delta}_{it}.
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Estimation} 
+\label{sec: estimation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Monte Carlo Simulation} 
+\label{sec: simulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Empirical application} 
+\label{sec: application}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion} 
+\label{sec: conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+\setstretch{1.0}
+\bibliographystyle{plainnat}
+\bibliography{citation}
+\endgroup
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%  Appendix  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{Appendix \thesection}{1em}{}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\setcounter{equation}{0}
+\renewcommand{\theassumption}{\thesection.\arabic{assumption}}
+\setcounter{assumption}{1}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\setcounter{figure}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Technical Details} 
+\label{sec: tech details}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Formal Result} 
+\label{sec: formal result}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Simulation Study} 
+\label{sec: simulation app}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Empirical Applicatoin} 
+\label{sec: application app}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

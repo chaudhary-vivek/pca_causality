@@ -1,0 +1,3 @@
+# packages in environment at /Users/wang/miniconda3/envs/gsc-ipca-env:
+#
+# Name                    Version                   Build  Channel

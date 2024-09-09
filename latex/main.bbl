@@ -1,0 +1,212 @@
+\begin{thebibliography}{41}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abadie and Imbens(2006)]{abadie2006large}
+Alberto Abadie and Guido~W Imbens.
+\newblock Large sample properties of matching estimators for average treatment effects.
+\newblock \emph{econometrica}, 74\penalty0 (1):\penalty0 235--267, 2006.
+
+\bibitem[Abadie and Imbens(2011)]{abadie2011bias}
+Alberto Abadie and Guido~W Imbens.
+\newblock Bias-corrected matching estimators for average treatment effects.
+\newblock \emph{Journal of Business \& Economic Statistics}, 29\penalty0 (1):\penalty0 1--11, 2011.
+
+\bibitem[Abadie et~al.(2010)Abadie, Diamond, and Hainmueller]{abadie2010synthetic}
+Alberto Abadie, Alexis Diamond, and Jens Hainmueller.
+\newblock Synthetic control methods for comparative case studies: Estimating the effect of california’s tobacco control program.
+\newblock \emph{Journal of the American statistical Association}, 105\penalty0 (490):\penalty0 493--505, 2010.
+
+\bibitem[Arkhangelsky et~al.(2021)Arkhangelsky, Athey, Hirshberg, Imbens, and Wager]{arkhangelsky2021synthetic}
+Dmitry Arkhangelsky, Susan Athey, David~A Hirshberg, Guido~W Imbens, and Stefan Wager.
+\newblock Synthetic difference-in-differences.
+\newblock \emph{American Economic Review}, 111\penalty0 (12):\penalty0 4088--4118, 2021.
+
+\bibitem[Arnorsson and Zoega(2018)]{arnorsson2018causes}
+Agust Arnorsson and Gylfi Zoega.
+\newblock On the causes of brexit.
+\newblock \emph{European Journal of Political Economy}, 55:\penalty0 301--323, 2018.
+
+\bibitem[Ashenfelter(1978)]{ashenfelter1978estimating}
+Orley Ashenfelter.
+\newblock Estimating the effect of training programs on earnings.
+\newblock \emph{The Review of Economics and Statistics}, pages 47--57, 1978.
+
+\bibitem[Athey et~al.(2021)Athey, Bayati, Doudchenko, Imbens, and Khosravi]{athey2021matrix}
+Susan Athey, Mohsen Bayati, Nikolay Doudchenko, Guido Imbens, and Khashayar Khosravi.
+\newblock Matrix completion methods for causal panel data models.
+\newblock \emph{Journal of the American Statistical Association}, 116\penalty0 (536):\penalty0 1716--1730, 2021.
+
+\bibitem[Bai(2009)]{bai2009panel}
+Jushan Bai.
+\newblock Panel data models with interactive fixed effects.
+\newblock \emph{Econometrica}, 77\penalty0 (4):\penalty0 1229--1279, 2009.
+
+\bibitem[Bai and Ng(2002)]{bai2002determining}
+Jushan Bai and Serena Ng.
+\newblock Determining the number of factors in approximate factor models.
+\newblock \emph{Econometrica}, 70\penalty0 (1):\penalty0 191--221, 2002.
+
+\bibitem[Bai and Perron(2003)]{bai2003computation}
+Jushan Bai and Pierre Perron.
+\newblock Computation and analysis of multiple structural change models.
+\newblock \emph{Journal of applied econometrics}, 18\penalty0 (1):\penalty0 1--22, 2003.
+
+\bibitem[Ben-Michael et~al.(2021)Ben-Michael, Feller, and Rothstein]{ben2021augmented}
+Eli Ben-Michael, Avi Feller, and Jesse Rothstein.
+\newblock The augmented synthetic control method.
+\newblock \emph{Journal of the American Statistical Association}, 116\penalty0 (536):\penalty0 1789--1803, 2021.
+
+\bibitem[Brave(2009)]{brave2009chicago}
+Scott Brave.
+\newblock The chicago fed national activity index and business cycles.
+\newblock \emph{Chicago Fed Letter}, \penalty0 (Nov), 2009.
+
+\bibitem[Card and Krueger(1993)]{card1993minimum}
+David Card and Alan~B Krueger.
+\newblock Minimum wages and employment: A case study of the fast food industry in new jersey and pennsylvania, 1993.
+
+\bibitem[Chan et~al.(2016)Chan, Kwok, et~al.]{chan2016policy}
+Marc Chan, Simon Kwok, et~al.
+\newblock Policy evaluation with interactive fixed effects.
+\newblock \emph{Preprint. Available at https://ideas. repec. org/p/syd/wpaper/2016-11. html}, 2016.
+
+\bibitem[Chernozhukov et~al.(2021)Chernozhukov, W{\"u}thrich, and Zhu]{chernozhukov2021exact}
+Victor Chernozhukov, Kaspar W{\"u}thrich, and Yinchu Zhu.
+\newblock An exact and robust conformal inference method for counterfactual and synthetic controls.
+\newblock \emph{Journal of the American Statistical Association}, 116\penalty0 (536):\penalty0 1849--1864, 2021.
+
+\bibitem[Colantone and Stanig(2018)]{colantone2018global}
+Italo Colantone and Piero Stanig.
+\newblock Global competition and brexit.
+\newblock \emph{American political science review}, 112\penalty0 (2):\penalty0 201--218, 2018.
+
+\bibitem[Connor and Korajczyk(1993)]{connor1993test}
+Gregory Connor and Robert~A Korajczyk.
+\newblock A test for the number of factors in an approximate factor model.
+\newblock \emph{the Journal of Finance}, 48\penalty0 (4):\penalty0 1263--1291, 1993.
+
+\bibitem[Dhingra et~al.(2016)Dhingra, Ottaviano, Sampson, and Van~Reenen]{dhingra2016impact}
+Swati Dhingra, Gianmarco Ottaviano, Thomas Sampson, and John Van~Reenen.
+\newblock The impact of brexit on foreign investment in the uk.
+\newblock \emph{BREXIT 2016}, 24\penalty0 (2):\penalty0 1--10, 2016.
+
+\bibitem[Eberhardt and Bond(2009)]{eberhardt2009cross}
+Markus Eberhardt and Stephen Bond.
+\newblock Cross-section dependence in nonstationary panel models: a novel estimator.
+\newblock 2009.
+
+\bibitem[Feng et~al.(2020)Feng, Giglio, and Xiu]{feng2020taming}
+Guanhao Feng, Stefano Giglio, and Dacheng Xiu.
+\newblock Taming the factor zoo: A test of new factors.
+\newblock \emph{The Journal of Finance}, 75\penalty0 (3):\penalty0 1327--1370, 2020.
+
+\bibitem[Gobillon and Magnac(2016)]{gobillon2016regional}
+Laurent Gobillon and Thierry Magnac.
+\newblock Regional policy evaluation: Interactive fixed effects and synthetic controls.
+\newblock \emph{Review of Economics and Statistics}, 98\penalty0 (3):\penalty0 535--551, 2016.
+
+\bibitem[Higham(2009)]{higham2009cholesky}
+Nicholas~J Higham.
+\newblock Cholesky factorization.
+\newblock \emph{Wiley interdisciplinary reviews: computational statistics}, 1\penalty0 (2):\penalty0 251--254, 2009.
+
+\bibitem[Hsiao et~al.(2012)Hsiao, Steve~Ching, and Ki~Wan]{hsiao2012panel}
+Cheng Hsiao, H~Steve~Ching, and Shui Ki~Wan.
+\newblock A panel data approach for program evaluation: measuring the benefits of political and economic integration of hong kong with mainland china.
+\newblock \emph{Journal of Applied Econometrics}, 27\penalty0 (5):\penalty0 705--740, 2012.
+
+\bibitem[Imbens(2024)]{imbens2024causal}
+Guido~W Imbens.
+\newblock Causal inference in the social sciences.
+\newblock \emph{Annual Review of Statistics and Its Application}, 11, 2024.
+
+\bibitem[Imbens and Rubin(2015)]{imbens2015causal}
+Guido~W Imbens and Donald~B Rubin.
+\newblock \emph{Causal inference in statistics, social, and biomedical sciences}.
+\newblock Cambridge University Press, 2015.
+
+\bibitem[Jollife and Cadima(2016)]{jollife2016principal}
+Ian~T Jollife and Jorge Cadima.
+\newblock Principal component analysis: A review and recent developments.
+\newblock \emph{Philos. Trans. R. Soc. A Math. Phys. Eng. Sci}, 374\penalty0 (2065):\penalty0 20150202, 2016.
+
+\bibitem[Jolliffe(2002)]{jolliffe2002principal}
+Ian~T Jolliffe.
+\newblock \emph{Principal component analysis for special types of data}.
+\newblock Springer, 2002.
+
+\bibitem[Kelly et~al.(2019)Kelly, Pruitt, and Su]{kelly2019characteristics}
+Bryan~T Kelly, Seth Pruitt, and Yinan Su.
+\newblock Characteristics are covariances: A unified model of risk and return.
+\newblock \emph{Journal of Financial Economics}, 134\penalty0 (3):\penalty0 501--524, 2019.
+
+\bibitem[Kelly et~al.(2020)Kelly, Pruitt, and Su]{kelly2020instrumented}
+Bryan~T Kelly, Seth Pruitt, and Yinan Su.
+\newblock Instrumented principal component analysis.
+\newblock \emph{Available at SSRN 2983919}, 2020.
+
+\bibitem[Li(2018)]{li2018inference}
+Kathleen Li.
+\newblock Inference for factor model based average treatment effects.
+\newblock \emph{Available at SSRN 3112775}, 2018.
+
+\bibitem[Neyman(1932)]{splawa1990application}
+Jerzy Neyman.
+\newblock On the application of probability theory to agricultural experiments. essay on principles. section 9.
+\newblock \emph{Statistical Science}, pages 465--472, 1932.
+
+\bibitem[Pesaran(2006)]{pesaran2006estimation}
+M~Hashem Pesaran.
+\newblock Estimation and inference in large heterogeneous panels with a multifactor error structure.
+\newblock \emph{Econometrica}, 74\penalty0 (4):\penalty0 967--1012, 2006.
+
+\bibitem[Rosenbaum and Rubin(1983)]{rosenbaum1983central}
+Paul~R Rosenbaum and Donald~B Rubin.
+\newblock The central role of the propensity score in observational studies for causal effects.
+\newblock \emph{Biometrika}, 70\penalty0 (1):\penalty0 41--55, 1983.
+
+\bibitem[Roth et~al.(2023)Roth, Sant’Anna, Bilinski, and Poe]{roth2023s}
+Jonathan Roth, Pedro~HC Sant’Anna, Alyssa Bilinski, and John Poe.
+\newblock What’s trending in difference-in-differences? a synthesis of the recent econometrics literature.
+\newblock \emph{Journal of Econometrics}, 235\penalty0 (2):\penalty0 2218--2244, 2023.
+
+\bibitem[Rubin(1974)]{rubin1974estimating}
+Donald~B Rubin.
+\newblock Estimating causal effects of treatments in randomized and nonrandomized studies.
+\newblock \emph{Journal of educational Psychology}, 66\penalty0 (5):\penalty0 688, 1974.
+
+\bibitem[Rubin(1997)]{rubin1997estimating}
+Donald~B Rubin.
+\newblock Estimating causal effects from large data sets using propensity scores.
+\newblock \emph{Annals of internal medicine}, 127\penalty0 (8\_Part\_2):\penalty0 757--763, 1997.
+
+\bibitem[Rubin(2005)]{rubin2005causal}
+Donald~B Rubin.
+\newblock Causal inference using potential outcomes: Design, modeling, decisions.
+\newblock \emph{Journal of the American Statistical Association}, 100\penalty0 (469):\penalty0 322--331, 2005.
+
+\bibitem[Shafer and Vovk(2008)]{shafer2008tutorial}
+Glenn Shafer and Vladimir Vovk.
+\newblock A tutorial on conformal prediction.
+\newblock \emph{Journal of Machine Learning Research}, 9\penalty0 (3), 2008.
+
+\bibitem[Stock and Watson(2002)]{stock2002forecasting}
+James~H Stock and Mark~W Watson.
+\newblock Forecasting using principal components from a large number of predictors.
+\newblock \emph{Journal of the American statistical association}, 97\penalty0 (460):\penalty0 1167--1179, 2002.
+
+\bibitem[Welfens and Baier(2018)]{welfens2018brexit}
+Paul~JJ Welfens and Fabian~J Baier.
+\newblock Brexit and foreign direct investment: Key issues and new empirical findings.
+\newblock \emph{International Journal of Financial Studies}, 6\penalty0 (2):\penalty0 46, 2018.
+
+\bibitem[Xu(2017)]{xu2017generalized}
+Yiqing Xu.
+\newblock Generalized synthetic control method: Causal inference with interactive fixed effects models.
+\newblock \emph{Political Analysis}, 25\penalty0 (1):\penalty0 57--76, 2017.
+
+\end{thebibliography}
